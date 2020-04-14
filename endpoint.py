@@ -7,10 +7,11 @@ import falcon
 
 from api.search import BlueprintSearchHandler
 
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('EndPoint')
 
 api = falcon.API()
-api.add_route('/search/blueprint', BlueprintSearchHandler())
+api.add_route('/api/search/blueprint', BlueprintSearchHandler())
 
 
 if __name__ == '__main__':

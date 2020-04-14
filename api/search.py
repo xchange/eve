@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import falcon
-import ujson
 from sqlalchemy import text
 
 from config import EVE_DB
+from library.convert import json_encode
+from api import generate_response
 
 
 class BlueprintSearchHandler:
@@ -28,8 +29,9 @@ class BlueprintSearchHandler:
         q = req.get_param('q', required=True).strip()
         length = len(q)
         if length < 2 or length > 32:
-            rsp.body = '[]'
+            rsp.body = json_encode(generate_response(1, 'query too short'))
             return
         rows = self.search(q)
-        result = [{'typeID': row[0], 'blueprintText': row[1]} for row in rows]
-        rsp.body = ujson.dumps(result, ensure_ascii=False)
+        response = generate_response()
+        response['data']['blueprint'] = [{'typeID': row[0], 'blueprintText': row[1]} for row in rows]
+        rsp.body = json_encode(response)
