@@ -1,0 +1,3 @@
+falcon==2.0.0
+mysqlclient==1.4.6
+SQLAlchemy==1.3.16
