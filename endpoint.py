@@ -6,7 +6,7 @@ from wsgiref.simple_server import make_server
 import falcon
 
 from api.industry import BlueprintMaterialsHandler
-from api.search import BlueprintSearchHandler
+from api.search import BlueprintSearchHandler, ReactionSearchHandler
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('EndPoint')
@@ -14,6 +14,7 @@ logger = logging.getLogger('EndPoint')
 api = falcon.API()
 api.add_route('/api/industry/blueprint/materials', BlueprintMaterialsHandler())
 api.add_route('/api/search/blueprint', BlueprintSearchHandler())
+api.add_route('/api/search/reaction', ReactionSearchHandler())
 
 
 if __name__ == '__main__':
